@@ -1,0 +1,31 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Dashboard</div>
+
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                   <h3 class="color: blue">Unread Notifications</h3>
+                   @foreach(Auth::user()->unreadnotifications as $notification)
+                   <h4>{{$notification->data['letter']['title']}}</h4>
+                   @endforeach
+
+                   <h3 class="color: blue">Read Notifications</h3>
+                   @foreach(Auth::user()->readnotifications as $notification)
+                   <h4>{{$notification->data['letter']['title']}}</h4>
+                   @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
